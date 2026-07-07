@@ -132,11 +132,13 @@
 
         .memory-img {
             width: 100%;
-            height: 280px;
-            object-fit: cover;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
             border-radius: 16px;
             margin-bottom: 1.2rem;
             transition: transform 0.5s ease;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .memory-card:hover .memory-img {
@@ -334,7 +336,7 @@
             .welcome p { font-size: 1.1rem; }
             .memory-container { padding: 1rem; gap: 1.5rem; }
             .memory-card { padding: 1.2rem; border-radius: 16px; }
-            .memory-img { height: 220px; }
+            .memory-img { max-height: 280px; }
             .memory-date { font-size: 1.4rem; }
             .memory-caption { font-size: 0.95rem; }
             .final-message { padding: 3rem 1rem; margin: 2rem 0; }
@@ -486,7 +488,7 @@
     <div class="gallery-tabs">
         <button class="tab-btn active" data-tab="she-tab">The Birthday Queen 👑</button>
         <button class="tab-btn" data-tab="both-tab">Us Together 💑</button>
-        <button class="tab-btn" data-tab="me-tab">Your Boyfriend 🙋‍♂️</button>
+        <button class="tab-btn" data-tab="me-tab">Your Husband 🙋‍♂️</button>
         <button class="tab-btn" data-tab="letter-tab">Surprise Letter 💌</button>
     </div>
 
@@ -542,7 +544,7 @@
         </div>
     </div>
 
-    <!-- Category 3: Your Boyfriend -->
+    <!-- Category 3: Your Husband -->
     <div class="gallery-pane" id="me-tab">
         <div class="memory-container">
             <div class="memory-card">
