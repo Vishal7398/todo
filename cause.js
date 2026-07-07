@@ -70,12 +70,14 @@ function createReasonCard(reason) {
     card.appendChild(text);
     card.appendChild(gifOverlay);
     
-    gsap.from(card, {
-        opacity: 0,
-        y: 50,
-        duration: 0.5,
-        ease: "back.out"
-    });
+    if (typeof gsap !== 'undefined') {
+        gsap.from(card, {
+            opacity: 0,
+            y: 50,
+            duration: 0.5,
+            ease: "back.out"
+        });
+    }
 
     return card;
 }
@@ -86,21 +88,23 @@ function displayNewReason() {
     isTransitioning = true;
 
     if (currentReasonIndex < reasons.length) {
-        // Confetti burst for each reason revealed
-        confetti({
-            particleCount: 40,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: ['#ff3b93', '#ff7bb0']
-        });
-        confetti({
-            particleCount: 40,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: ['#ff3b93', '#ff7bb0']
-        });
+        // Confetti burst for each reason revealed (wrapped in safety checks)
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 40,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#ff3b93', '#ff7bb0']
+            });
+            confetti({
+                particleCount: 40,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#ff3b93', '#ff7bb0']
+            });
+        }
 
         const card = createReasonCard(reasons[currentReasonIndex]);
         reasonsContainer.appendChild(card);
@@ -112,16 +116,22 @@ function displayNewReason() {
 
         // Check if we should transform the button
         if (currentReasonIndex === reasons.length) {
-            gsap.to(shuffleButton, {
-                scale: 1.1,
-                duration: 0.5,
-                ease: "elastic.out",
-                onComplete: () => {
-                    shuffleButton.textContent = "Enter Our Storylane 💫";
-                    shuffleButton.classList.add('story-mode');
-                    isStoryMode = true;
-                }
-            });
+            if (typeof gsap !== 'undefined') {
+                gsap.to(shuffleButton, {
+                    scale: 1.1,
+                    duration: 0.5,
+                    ease: "elastic.out",
+                    onComplete: () => {
+                        shuffleButton.textContent = "Enter Our Storylane 💫";
+                        shuffleButton.classList.add('story-mode');
+                        isStoryMode = true;
+                    }
+                });
+            } else {
+                shuffleButton.textContent = "Enter Our Storylane 💫";
+                shuffleButton.classList.add('story-mode');
+                isStoryMode = true;
+            }
         }
 
         // Create floating elements
@@ -136,29 +146,37 @@ function displayNewReason() {
 // Initialize button click
 shuffleButton.addEventListener('click', () => {
     if (isStoryMode) {
-        confetti({
-            particleCount: 150,
-            spread: 80,
-            origin: { y: 0.6 }
-        });
-        setTimeout(() => {
-            gsap.to('body', {
-                opacity: 0,
-                duration: 0.8,
-                onComplete: () => {
-                    window.location.href = 'last.html';
-                }
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
             });
+        }
+        setTimeout(() => {
+            if (typeof gsap !== 'undefined') {
+                gsap.to('body', {
+                    opacity: 0,
+                    duration: 0.8,
+                    onComplete: () => {
+                        window.location.href = 'last.html';
+                    }
+                });
+            } else {
+                window.location.href = 'last.html';
+            }
         }, 800);
         return;
     }
 
-    gsap.to(shuffleButton, {
-        scale: 0.9,
-        duration: 0.1,
-        yoyo: true,
-        repeat: 1
-    });
+    if (typeof gsap !== 'undefined') {
+        gsap.to(shuffleButton, {
+            scale: 0.9,
+            duration: 0.1,
+            yoyo: true,
+            repeat: 1
+        });
+    }
     displayNewReason();
 });
 
@@ -173,15 +191,23 @@ function createFloatingElement() {
     element.style.fontSize = (Math.random() * 20 + 15) + 'px';
     document.body.appendChild(element);
 
-    gsap.to(element, {
-        y: -window.innerHeight - 100,
-        duration: Math.random() * 8 + 8,
-        opacity: 0,
-        onComplete: () => element.remove()
-    });
+    if (typeof gsap !== 'undefined') {
+        gsap.to(element, {
+            y: -window.innerHeight - 100,
+            duration: Math.random() * 8 + 8,
+            opacity: 0,
+            onComplete: () => element.remove()
+        });
+    } else {
+        // Fallback animation
+        element.style.transition = 'transform 8s linear, opacity 8s linear';
+        setTimeout(() => {
+            element.style.transform = `translateY(${-window.innerHeight - 100}px)`;
+            element.style.opacity = 0;
+        }, 50);
+        setTimeout(() => element.remove(), 8000);
+    }
 }
-
-
 
 window.addEventListener('load', () => {
     updateMusicState();
