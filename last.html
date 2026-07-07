@@ -357,6 +357,119 @@
             .goodbye-btn { padding: 1rem 2rem; font-size: 1.1rem; }
             .music-toggle { top: 15px; right: 15px; width: 42px; height: 42px; font-size: 1.2rem; }
         }
+
+        /* Gallery Tabs Styling */
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+            z-index: 3;
+            position: relative;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 30px;
+            color: #ff3b93;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 5px 15px rgba(255, 59, 147, 0.1);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, #ff3b93, #ff7bb0);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(255, 59, 147, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .gallery-pane {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-pane.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Letter Styling */
+        .letter-deck {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .letter-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 28px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            max-width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .letter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            color: #ff3b93;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .letter-img {
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 5px solid white;
+        }
+
+        @media (max-width: 480px) {
+            .tab-btn {
+                padding: 0.6rem 1.1rem;
+                font-size: 0.85rem;
+            }
+            .letter-card {
+                padding: 1.2rem;
+                border-radius: 20px;
+            }
+            .letter-title {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 
@@ -384,21 +497,98 @@
         <p>Every moment spent with you has been magical. Let's cherish these precious memories ...</p>
     </section>
 
-    <div class="memory-container">
-        <div class="memory-card">
-            <img src="./d1.jpg" alt="First Date" class="memory-img">
-            <div class="memory-date">Her Smile Says It All</div>
-            <div class="memory-caption">You’re the sweetest girl in the entire universe, and I feel so lucky to have you as my girlfriend.❤️</div>
+    <!-- Gallery Navigation Tabs -->
+    <div class="gallery-tabs">
+        <button class="tab-btn active" data-tab="she-tab">The Birthday Queen 👑</button>
+        <button class="tab-btn" data-tab="both-tab">Us Together 💑</button>
+        <button class="tab-btn" data-tab="me-tab">Your Boyfriend 🙋‍♂️</button>
+        <button class="tab-btn" data-tab="letter-tab">Surprise Letter 💌</button>
+    </div>
+
+    <!-- Category 1: The Birthday Queen -->
+    <div class="gallery-pane active" id="she-tab">
+        <div class="memory-container">
+            <div class="memory-card">
+                <img src="./she 1.jpg" alt="Birthday Queen 1" class="memory-img">
+                <div class="memory-date">Stunning Queen ✨</div>
+                <div class="memory-caption">Your beauty, warmth, and laughter make everything in life feel perfect.</div>
+            </div>
+            <div class="memory-card">
+                <img src="./she 2.jpg" alt="Birthday Queen 2" class="memory-img">
+                <div class="memory-date">Breathtaking Smile 🌸</div>
+                <div class="memory-caption">No matter where you go, you spread light and joy everywhere.</div>
+            </div>
+            <div class="memory-card">
+                <img src="./she 3.jpg" alt="Birthday Queen 3" class="memory-img">
+                <div class="memory-date">Most Adorable Girl 💖</div>
+                <div class="memory-caption">I hope your special day is as absolutely beautiful as your soul.</div>
+            </div>
+            <div class="memory-card">
+                <img src="./she 4.jpg" alt="Birthday Queen 4" class="memory-img">
+                <div class="memory-date">Pure Elegance 🌟</div>
+                <div class="memory-caption">Always shining, always glowing, and always being the sweetest girl.</div>
+            </div>
+            <div class="memory-card">
+                <img src="./she 5.jpg" alt="Birthday Queen 5" class="memory-img">
+                <div class="memory-date">My Sweetheart 💗</div>
+                <div class="memory-caption">May every dream in your heart come true today. I love you!</div>
+            </div>
         </div>
-        <div class="memory-card">
-            <img src="./d2.jpg" alt="Beach Day" class="memory-img">
-            <div class="memory-date">Together Vibes</div>
-            <div class="memory-caption">May your journey ahead be filled with happiness, success, and endless smiles.😊💕</div>
+    </div>
+
+    <!-- Category 2: Us Together -->
+    <div class="gallery-pane" id="both-tab">
+        <div class="memory-container">
+            <div class="memory-card">
+                <img src="./both 1.jpg" alt="Us 1" class="memory-img">
+                <div class="memory-date">Side by Side 💕</div>
+                <div class="memory-caption">Every single second next to you is a memory I will cherish forever.</div>
+            </div>
+            <div class="memory-card">
+                <img src="./both 2.jpg" alt="Us 2" class="memory-img">
+                <div class="memory-date">Our Happy Place 💫</div>
+                <div class="memory-caption">Hand in hand, building a beautiful story together.</div>
+            </div>
+            <div class="memory-card">
+                <img src="./both 3.jpg" alt="Us 3" class="memory-img">
+                <div class="memory-date">Perfect Together 🌹</div>
+                <div class="memory-caption">You and me against the world. Happy birthday, my love!</div>
+            </div>
         </div>
-        <div class="memory-card">
-            <img src="./d3.jpg" alt="Movie Night" class="memory-img">
-            <div class="memory-date">Pretty Soul</div>
-            <div class="memory-caption">Keep being the amazing person you are—you make every moment brighter.🌸💖</div>
+    </div>
+
+    <!-- Category 3: Your Boyfriend -->
+    <div class="gallery-pane" id="me-tab">
+        <div class="memory-container">
+            <div class="memory-card">
+                <img src="./me 1.jpg" alt="Boyfriend 1" class="memory-img">
+                <div class="memory-date">Thinking of You 💭</div>
+                <div class="memory-caption">No matter where I am, you are always the only thing on my mind.</div>
+            </div>
+            <div class="memory-card">
+                <img src="./me 2.jpg" alt="Boyfriend 2" class="memory-img">
+                <div class="memory-date">Yours Truly 💌</div>
+                <div class="memory-caption">The luckiest guy in the world to call you mine.</div>
+            </div>
+            <div class="memory-card">
+                <img src="./me 3.jpg" alt="Boyfriend 3" class="memory-img">
+                <div class="memory-date">Always by Your Side 🤞</div>
+                <div class="memory-caption">I will always be here to support you, hold you, and love you forever.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 4: Surprise Letter -->
+    <div class="gallery-pane" id="letter-tab">
+        <div class="letter-deck">
+            <div class="letter-card">
+                <div class="letter-title">Part 1 of My Love Letter 💌</div>
+                <img src="./Letter 1.jpg" alt="Letter Page 1" class="letter-img">
+            </div>
+            <div class="letter-card">
+                <div class="letter-title">Part 2 of My Love Letter 💌</div>
+                <img src="./Letter 2.jpg" alt="Letter Page 2" class="letter-img">
+            </div>
         </div>
     </div>
 
@@ -412,6 +602,32 @@
     </section>
 
     <script>
+        // Gallery tabs switcher logic
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const galleryPanes = document.querySelectorAll('.gallery-pane');
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and panes
+                tabButtons.forEach(b => b.classList.remove('active'));
+                galleryPanes.forEach(p => p.classList.remove('active'));
+
+                // Add active class to current button and target pane
+                btn.classList.add('active');
+                const targetPane = document.getElementById(btn.getAttribute('data-tab'));
+                if (targetPane) {
+                    targetPane.classList.add('active');
+                    // Trigger a small confetti burst on tab switch
+                    confetti({
+                        particleCount: 25,
+                        spread: 50,
+                        origin: { y: 0.8 },
+                        colors: ['#ff3b93', '#ff7bb0']
+                    });
+                }
+            });
+        });
+
         // Custom cursor logic
         const cursor = document.querySelector('.cursor');
         document.addEventListener('mousemove', (e) => {
