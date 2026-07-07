@@ -230,9 +230,27 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+@media (hover: none) and (pointer: coarse) {
+    .custom-cursor {
+        display: none !important;
+    }
+    * {
+        cursor: auto !important;
+    }
+}
+
 @media (max-width: 768px) {
     .main-title { font-size: 2.6rem; }
     .reason-card { padding: 1.5rem; }
     .reason-text { font-size: 1.1rem; }
     .container { padding: 2rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+    .main-title { font-size: 2.2rem; }
+    .reason-card { padding: 1.2rem; margin: 1rem 0; }
+    .reason-text { font-size: 1rem; }
+    .container { padding: 1.5rem 1rem; border-radius: 20px; }
+    .music-toggle { top: 15px; right: 15px; width: 42px; height: 42px; font-size: 1.2rem; }
+    body { padding: 1rem; }
 }

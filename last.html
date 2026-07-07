@@ -319,6 +319,15 @@
         }
 
         /* Responsive Design */
+        @media (hover: none) and (pointer: coarse) {
+            .cursor {
+                display: none !important;
+            }
+            * {
+                cursor: auto !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .welcome h1 {
                 font-size: 3.2rem;
@@ -331,6 +340,22 @@
             .final-message h2 {
                 font-size: 2.8rem;
             }
+        }
+
+        @media (max-width: 480px) {
+            .welcome { padding: 4rem 1rem 1.5rem; }
+            .welcome h1 { font-size: 2.5rem; }
+            .welcome p { font-size: 1.1rem; }
+            .memory-container { padding: 1rem; gap: 1.5rem; }
+            .memory-card { padding: 1.2rem; border-radius: 16px; }
+            .memory-img { height: 220px; }
+            .memory-date { font-size: 1.4rem; }
+            .memory-caption { font-size: 0.95rem; }
+            .final-message { padding: 3rem 1rem; margin: 2rem 0; }
+            .final-message h2 { font-size: 2.4rem; }
+            .final-message p { font-size: 1.05rem; line-height: 1.6; }
+            .goodbye-btn { padding: 1rem 2rem; font-size: 1.1rem; }
+            .music-toggle { top: 15px; right: 15px; width: 42px; height: 42px; font-size: 1.2rem; }
         }
     </style>
 </head>
