@@ -5,28 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Beautiful Memories ✨</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;600&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none;
         }
 
         body {
             min-height: 100vh;
             background: linear-gradient(135deg,
-                    #ffd1dc 0%,
-                    #e6e6fa 25%,
-                    #ffefd5 50%,
-                    #e6e6fa 75%,
-                    #ffd1dc 100%);
+                    #ffc0cb 0%,
+                    #e0f2fe 25%,
+                    #fff0f5 50%,
+                    #f3e8ff 75%,
+                    #ffc0cb 100%);
             background-size: 400% 400%;
             animation: gradientFlow 15s ease infinite;
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
             color: #4a4a4a;
+            padding-bottom: 3rem;
         }
 
         @keyframes gradientFlow {
@@ -43,67 +48,17 @@
             }
         }
 
-        /* Enhanced Sparkle Effect */
-        .magic-sparkles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
+        /* Custom glowing cursor */
+        .cursor {
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, rgba(255,105,180,1) 0%, rgba(255,182,193,0.4) 70%, rgba(255,255,255,0) 100%);
             border-radius: 50%;
-            background-color: white;
-            animation: twinkle var(--duration, 4s) ease-in-out infinite;
-            opacity: 0;
-        }
-
-        @keyframes twinkle {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-
-            50% {
-                opacity: 0.8;
-                transform: scale(1);
-            }
-        }
-
-        /* Generate 50 sparkles with different positions and animations */
-        .magic-sparkles::before,
-        .magic-sparkles::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle, white 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: sparkleLayer 8s linear infinite;
-            opacity: 0.5;
-        }
-
-        .magic-sparkles::after {
-            animation-delay: -4s;
-            transform: rotate(45deg);
-        }
-
-        @keyframes sparkleLayer {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-50px);
-            }
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
         }
 
         /* Floating Hearts */
@@ -136,25 +91,26 @@
         /* Welcome Section */
         .welcome {
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem 3rem;
             position: relative;
             z-index: 3;
         }
 
         .welcome h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
-            color: #ff69b4;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 4.5rem;
+            color: #ff3b93;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
             animation: fadeInScale 2s ease;
         }
 
         .welcome p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             max-width: 600px;
             margin: 1.5rem auto;
             line-height: 1.6;
             animation: fadeIn 2s ease 0.5s both;
+            color: #5b21b6;
         }
 
         /* Enhanced Memory Cards */
@@ -163,131 +119,122 @@
             margin: 0 auto;
             padding: 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
             z-index: 3;
             position: relative;
         }
 
         .memory-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            padding: 1.8rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
             overflow: hidden;
         }
 
         .memory-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .memory-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-
-        .memory-card:hover::before {
-            transform: translateX(100%);
+            box-shadow: 0 20px 40px rgba(255, 59, 147, 0.15);
+            background: rgba(255, 255, 255, 0.85);
         }
 
         .memory-img {
             width: 100%;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 1rem;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
             transition: transform 0.5s ease;
         }
 
         .memory-card:hover .memory-img {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         .memory-date {
             font-family: 'Dancing Script', cursive;
-            color: #ff69b4;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            color: #ff3b93;
+            font-size: 1.6rem;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
         }
 
         .memory-caption {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #555;
+            font-weight: 400;
         }
 
         /* Final Message Section */
         .final-message {
             text-align: center;
-            padding: 4rem 2rem;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            margin-top: 3rem;
+            padding: 5rem 2rem;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            margin: 4rem 0;
             position: relative;
             z-index: 3;
         }
 
         .final-message h2 {
             font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            color: #ff69b4;
+            font-size: 4rem;
+            color: #ff3b93;
             margin-bottom: 2rem;
             animation: heartbeat 2s infinite;
         }
 
         @keyframes heartbeat {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: scale(1);
             }
 
             50% {
-                transform: scale(1.1);
+                transform: scale(1.05);
             }
         }
 
         .final-message p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             max-width: 800px;
             margin: 0 auto 2rem;
             line-height: 1.8;
+            color: #4a4a4a;
         }
 
         .goodbye-btn {
             display: inline-block;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            background: linear-gradient(45deg, #ff69b4, #da70d6);
+            padding: 1.2rem 3rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ff3b93, #ff7bb0);
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 59, 147, 0.4);
             animation: float 3s infinite ease-in-out;
         }
 
         .goodbye-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 59, 147, 0.6);
         }
 
         @keyframes float {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0);
             }
 
@@ -296,11 +243,49 @@
             }
         }
 
+        /* Floating Music Control */
+        .music-toggle {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .music-toggle.playing {
+            animation: rotateMusic 4s linear infinite;
+            background: #ff3b93;
+            color: white;
+            border-color: #ff3b93;
+        }
+
+        @keyframes rotateMusic {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         /* Animations */
         @keyframes fadeInScale {
             0% {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: scale(0.85);
             }
 
             100% {
@@ -319,33 +304,24 @@
             }
         }
 
-        /* Generate Hearts */
-        .js-generate-hearts {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 12px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #ff69b4, #da70d6);
+            background: linear-gradient(45deg, #ff3b93, #ff7bb0);
             border-radius: 6px;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .welcome h1 {
-                font-size: 3rem;
+                font-size: 3.2rem;
             }
 
             .memory-container {
@@ -353,16 +329,24 @@
             }
 
             .final-message h2 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="magic-sparkles"></div>
+    <div class="cursor"></div>
+
+    <!-- Music Controller -->
+    <button class="music-toggle" id="music-btn" aria-label="Toggle Music">
+        <span class="music-icon">🎵</span>
+    </button>
+    <audio id="bg-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-2431.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="floating-hearts">
-        <!-- Hearts will be generated via CSS -->
         <div class="heart" style="--float-duration: 6s; --delay: 0s; --translate-x: 20px;">💝</div>
         <div class="heart" style="--float-duration: 8s; --delay: 1s; --translate-x: -30px;">💖</div>
         <div class="heart" style="--float-duration: 7s; --delay: 2s; --translate-x: 40px;">💗</div>
@@ -371,7 +355,7 @@
     </div>
 
     <section class="welcome">
-        <h1>Our Beautiful Moments Together</h1>
+        <h1>Our Beautiful Memories Together</h1>
         <p>Every moment spent with you has been magical. Let's cherish these precious memories ...</p>
     </section>
 
@@ -384,15 +368,13 @@
         <div class="memory-card">
             <img src="./d2.jpg" alt="Beach Day" class="memory-img">
             <div class="memory-date">Together Vibes</div>
-            <div class="memory-caption">May your journey ahead be filled with happiness, success, and endless
-                smiles.😊💕</div>
+            <div class="memory-caption">May your journey ahead be filled with happiness, success, and endless smiles.😊💕</div>
         </div>
         <div class="memory-card">
             <img src="./d3.jpg" alt="Movie Night" class="memory-img">
             <div class="memory-date">Pretty Soul</div>
             <div class="memory-caption">Keep being the amazing person you are—you make every moment brighter.🌸💖</div>
         </div>
-
     </div>
 
     <section class="final-message">
@@ -401,8 +383,87 @@
             I’m incredibly grateful for your love, your warmth, and the happiness you bring into my life every day.<br>
             On your birthday, I want to remind you how deeply loved you are. I wish you all the joy, love, and success in the world. 🌸</p>
         <p>You deserve the absolute best today and always. I love you, sweetheart! ✨</p>
-        <a href="#" class="goodbye-btn">I Love You Forever 💝</a>
+        <a href="#" class="goodbye-btn" id="love-btn">I Love You Forever 💝</a>
     </section>
+
+    <script>
+        // Custom cursor logic
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Music player management
+        const musicBtn = document.getElementById('music-btn');
+        const bgMusic = document.getElementById('bg-music');
+        let isPlaying = localStorage.getItem('music-playing') === 'true';
+
+        function updateMusicState() {
+            if (isPlaying) {
+                bgMusic.play().catch(() => {
+                    isPlaying = false;
+                    musicBtn.classList.remove('playing');
+                });
+                musicBtn.classList.add('playing');
+            } else {
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
+            }
+        }
+
+        musicBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            localStorage.setItem('music-playing', isPlaying);
+            updateMusicState();
+        });
+
+        // Birthday confetti shower on load
+        window.addEventListener('load', () => {
+            updateMusicState();
+
+            // Heart confetti shower
+            const duration = 15 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 25, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                // since particles fall down, animate a bit higher than random
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        });
+
+        // Love button click explosion
+        const loveBtn = document.getElementById('love-btn');
+        if (loveBtn) {
+            loveBtn.addEventListener('mouseenter', () => {
+                gsap.to(cursor, { scale: 1.8, background: 'rgba(255, 59, 147, 0.6)' });
+            });
+            loveBtn.addEventListener('mouseleave', () => {
+                gsap.to(cursor, { scale: 1, background: 'radial-gradient(circle, rgba(255,105,180,1) 0%, rgba(255,182,193,0.4) 70%, rgba(255,255,255,0) 100%)' });
+            });
+            loveBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

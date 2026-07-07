@@ -14,82 +14,117 @@ function typeGreeting() {
     if (charIndex < greetingText.length) {
         greetingElement.textContent += greetingText.charAt(charIndex);
         charIndex++;
-        setTimeout(typeGreeting, 100);
+        setTimeout(typeGreeting, 80);
     }
 }
 
 // Create floating elements
-const floatingElements = ['💖', '✨', '🌸', '💫', '💕'];
+const floatingElements = ['💖', '✨', '🌸', '💫', '💕', '🌹'];
 function createFloating() {
     const element = document.createElement('div');
     element.className = 'floating';
     element.textContent = floatingElements[Math.floor(Math.random() * floatingElements.length)];
     element.style.left = Math.random() * 100 + 'vw';
-    element.style.top = Math.random() * 100 + 'vh';
+    element.style.top = '100vh';
     element.style.fontSize = (Math.random() * 20 + 20) + 'px';
     document.body.appendChild(element);
 
     gsap.to(element, {
-        y: -500,
-        x: Math.random() * 100 - 50,
+        y: -1100,
+        x: Math.random() * 200 - 100,
         rotation: Math.random() * 360,
-        duration: Math.random() * 5 + 5,
-        opacity: 1,
-        ease: "none",
+        duration: Math.random() * 6 + 6,
+        opacity: 0.8,
+        ease: "power1.out",
         onComplete: () => element.remove()
     });
 }
 
+// Music player management
+const musicBtn = document.getElementById('music-btn');
+const bgMusic = document.getElementById('bg-music');
+
+// Sync state from localStorage
+let isPlaying = localStorage.getItem('music-playing') === 'true';
+
+function updateMusicState() {
+    if (isPlaying) {
+        bgMusic.play().catch(() => {
+            // Browser autoplays block sometimes, user gesture needed
+            isPlaying = false;
+            musicBtn.classList.remove('playing');
+        });
+        musicBtn.classList.add('playing');
+    } else {
+        bgMusic.pause();
+        musicBtn.classList.remove('playing');
+    }
+}
+
+musicBtn.addEventListener('click', () => {
+    isPlaying = !isPlaying;
+    localStorage.setItem('music-playing', isPlaying);
+    updateMusicState();
+});
+
 // Initialize animations
 window.addEventListener('load', () => {
-    // Title animation
-    gsap.to('h1', {
+    // Attempt auto-play if previously enabled
+    updateMusicState();
+
+    // GSAP Title animation
+    gsap.to('.main-title', {
         opacity: 1,
-        duration: 1,
-        y: 20,
-        ease: "bounce.out"
+        y: 0,
+        duration: 1.2,
+        ease: "power3.out"
     });
 
-    // Button animation
+    // GSAP Button animation
     gsap.to('.cta-button', {
         opacity: 1,
-        duration: 1,
-        y: -20,
-        ease: "back.out"
+        y: 0,
+        duration: 1.2,
+        delay: 0.3,
+        ease: "power3.out"
     });
 
     // Start typing effect
-    typeGreeting();
+    setTimeout(typeGreeting, 500);
 
     // Create floating elements periodically
-    setInterval(createFloating, 1000);
+    setInterval(createFloating, 800);
 });
 
-// Hover effects
-       // Hover effects
-       document.querySelectorAll('.cta-button').forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            gsap.to(button, {
-                scale: 1.1,
-                duration: 0.3
-            });
+// Hover and Click animations
+const enterBtn = document.getElementById('enter-btn');
+if (enterBtn) {
+    enterBtn.addEventListener('mouseenter', () => {
+        gsap.to(cursor, { scale: 1.8, background: 'rgba(255, 59, 147, 0.6)' });
+    });
+
+    enterBtn.addEventListener('mouseleave', () => {
+        gsap.to(cursor, { scale: 1, background: 'radial-gradient(circle, rgba(255,105,180,1) 0%, rgba(255,182,193,0.4) 70%, rgba(255,255,255,0) 100%)' });
+    });
+
+    enterBtn.addEventListener('click', () => {
+        // Confetti explosion
+        confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#ff3b93', '#ff7bb0', '#ffebf5', '#e0f2fe']
         });
 
-        button.addEventListener('mouseleave', () => {
-            gsap.to(button, {
-                scale: 1,
-                duration: 0.3
-            });
-        });
-
-        // Smooth page transition on click
-        button.addEventListener('click', () => {
+        // Smooth transition to next page after a small delay to see confetti
+        setTimeout(() => {
             gsap.to('body', {
                 opacity: 0,
-                duration: 1,
+                duration: 0.8,
                 onComplete: () => {
-                    window.location.href = 'cause.html'; // Replace with the actual URL of the next page
+                    window.location.href = 'cause.html';
                 }
             });
-        });
+        }, 800);
     });
+}

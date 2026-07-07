@@ -29,6 +29,30 @@ const shuffleButton = document.querySelector('.shuffle-button');
 const reasonCounter = document.querySelector('.reason-counter');
 let isTransitioning = false;
 
+// Music player management
+const musicBtn = document.getElementById('music-btn');
+const bgMusic = document.getElementById('bg-music');
+let isPlaying = localStorage.getItem('music-playing') === 'true';
+
+function updateMusicState() {
+    if (isPlaying) {
+        bgMusic.play().catch(() => {
+            isPlaying = false;
+            musicBtn.classList.remove('playing');
+        });
+        musicBtn.classList.add('playing');
+    } else {
+        bgMusic.pause();
+        musicBtn.classList.remove('playing');
+    }
+}
+
+musicBtn.addEventListener('click', () => {
+    isPlaying = !isPlaying;
+    localStorage.setItem('music-playing', isPlaying);
+    updateMusicState();
+});
+
 // Create reason card with gif
 function createReasonCard(reason) {
     const card = document.createElement('div');
@@ -40,7 +64,7 @@ function createReasonCard(reason) {
     
     const gifOverlay = document.createElement('div');
     gifOverlay.className = 'gif-overlay';
-    gifOverlay.innerHTML = `<img src="${reason.gif}" alt="Friendship Memory">`;
+    gifOverlay.innerHTML = `<img src="${reason.gif}" alt="Love Memory">`;
     
     card.appendChild(text);
     card.appendChild(gifOverlay);
@@ -61,6 +85,22 @@ function displayNewReason() {
     isTransitioning = true;
 
     if (currentReasonIndex < reasons.length) {
+        // Confetti burst for each reason revealed
+        confetti({
+            particleCount: 40,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#ff3b93', '#ff7bb0']
+        });
+        confetti({
+            particleCount: 40,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#ff3b93', '#ff7bb0']
+        });
+
         const card = createReasonCard(reasons[currentReasonIndex]);
         reasonsContainer.appendChild(card);
         
@@ -79,13 +119,20 @@ function displayNewReason() {
                     shuffleButton.textContent = "Enter Our Storylane 💫";
                     shuffleButton.classList.add('story-mode');
                     shuffleButton.addEventListener('click', () => {
-                        gsap.to('body', {
-                            opacity: 0,
-                            duration: 1,
-                            onComplete: () => {
-                                window.location.href = 'last.html'; // Replace with the actual URL of the next page
-                            }
+                        confetti({
+                            particleCount: 150,
+                            spread: 80,
+                            origin: { y: 0.6 }
                         });
+                        setTimeout(() => {
+                            gsap.to('body', {
+                                opacity: 0,
+                                duration: 0.8,
+                                onComplete: () => {
+                                    window.location.href = 'last.html';
+                                }
+                            });
+                        }, 800);
                     });
                 }
             });
@@ -97,10 +144,6 @@ function displayNewReason() {
         setTimeout(() => {
             isTransitioning = false;
         }, 500);
-    } else {
-        // Handle navigation to new page or section
-        window.location.href = "#storylane";
-        // Or trigger your next page functionality
     }
 }
 
@@ -115,34 +158,36 @@ shuffleButton.addEventListener('click', () => {
     displayNewReason();
 });
 
-// Floating elements function (same as before)
+// Floating elements function
 function createFloatingElement() {
-    const elements = ['🌸', '✨', '💖', '🦋', '⭐'];
+    const elements = ['🌸', '✨', '💖', '🦋', '⭐', '🌹', '💕'];
     const element = document.createElement('div');
     element.className = 'floating';
     element.textContent = elements[Math.floor(Math.random() * elements.length)];
     element.style.left = Math.random() * window.innerWidth + 'px';
-    element.style.top = Math.random() * window.innerHeight + 'px';
-    element.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    element.style.top = window.innerHeight + 'px';
+    element.style.fontSize = (Math.random() * 20 + 15) + 'px';
     document.body.appendChild(element);
 
     gsap.to(element, {
-        y: -500,
-        duration: Math.random() * 10 + 10,
+        y: -window.innerHeight - 100,
+        duration: Math.random() * 8 + 8,
         opacity: 0,
         onComplete: () => element.remove()
     });
 }
 
-// Custom cursor (same as before)
+// Custom cursor
 const cursor = document.querySelector('.custom-cursor');
 document.addEventListener('mousemove', (e) => {
     gsap.to(cursor, {
         x: e.clientX - 15,
         y: e.clientY - 15,
-        duration: 0.2
+        duration: 0.1
     });
 });
 
-// Create initial floating elements
-setInterval(createFloatingElement, 2000);
+window.addEventListener('load', () => {
+    updateMusicState();
+    setInterval(createFloatingElement, 1500);
+});

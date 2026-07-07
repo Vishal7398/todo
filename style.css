@@ -11,67 +11,133 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(-45deg, #fee9f7, #e8f5fe, #fef2e8, #f0ffe8);
+    background: linear-gradient(-45deg, #ffc0cb, #e0f2fe, #fff0f5, #f3e8ff);
     background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+    animation: gradientBG 18s ease infinite;
+    font-family: 'Outfit', sans-serif;
     overflow: hidden;
     position: relative;
 }
 
+/* Custom glowing cursor */
 .cursor {
-    width: 20px;
-    height: 20px;
-    background: pink;
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle, rgba(255,105,180,1) 0%, rgba(255,182,193,0.4) 70%, rgba(255,255,255,0) 100%);
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
-    mix-blend-mode: difference;
-    transition: transform 0.2s;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
 }
 
 .container {
     text-align: center;
     z-index: 1;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    max-width: 90%;
+    width: 550px;
+    transform: scale(0.95);
+    animation: entrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-h1 {
-    font-size: 3.5rem;
-    color: #ff69b4;
-    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
-    margin-bottom: 2rem;
-    opacity: 0;
+@keyframes entrance {
+    to {
+        transform: scale(1);
+    }
+}
+
+.main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: #ff3b93;
+    text-shadow: 0 4px 15px rgba(255, 59, 147, 0.2);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
 }
 
 .greeting {
-    font-size: 1.5rem;
-    color: #8a2be2;
-    margin-bottom: 3rem;
-    min-height: 2em;
+    font-size: 1.3rem;
+    color: #5b21b6;
+    margin-bottom: 2.5rem;
+    min-height: 3.5em;
+    line-height: 1.6;
+    font-weight: 400;
 }
 
 .cta-button {
-    padding: 1rem 2rem;
+    padding: 1.1rem 2.5rem;
     font-size: 1.2rem;
-    background: linear-gradient(45deg, #ff69b4, #ff99cc);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    background: linear-gradient(45deg, #ff3b93, #ff7bb0);
     border: none;
     border-radius: 50px;
     color: white;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
-    transition: transform 0.3s, box-shadow 0.3s;
-    opacity: 0;
+    box-shadow: 0 8px 25px rgba(255, 59, 147, 0.4);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    letter-spacing: 0.5px;
 }
 
 .cta-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(255, 59, 147, 0.6);
+}
+
+.cta-button:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+/* Floating Music Control */
+.music-toggle {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.music-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.music-toggle.playing {
+    animation: rotateMusic 4s linear infinite;
+    background: #ff3b93;
+    color: white;
+    border-color: #ff3b93;
+}
+
+@keyframes rotateMusic {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .floating {
     position: absolute;
     pointer-events: none;
-    opacity: 0;
+    user-select: none;
 }
 
 @keyframes gradientBG {
@@ -81,7 +147,8 @@ h1 {
 }
 
 @media (max-width: 768px) {
-    h1 { font-size: 2rem; }
-    .greeting { font-size: 1.2rem; }
-    .cta-button { font-size: 1rem; }
+    .main-title { font-size: 2.8rem; }
+    .greeting { font-size: 1.1rem; }
+    .cta-button { font-size: 1.1rem; padding: 1rem 2rem; }
+    .container { width: 90%; }
 }
