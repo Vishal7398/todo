@@ -1,22 +1,22 @@
  // Reasons database
  const reasons = [
     { 
-        text: "You’re such a kind and wonderful person, and I feel lucky to share such a good bond with you. 💖", 
+        text: "The way you smile lights up my whole world, and I feel like the luckiest person to have you by my side. 💖", 
         emoji: "🌟",
         gif: "gif1.gif"
     },
     { 
-        text: "May your day be filled with love, laughter, and endless joy. 🌸 ", 
+        text: "You make every single day feel special, and I want to make your birthday the most magical day ever. 🌸 ", 
         emoji: "💗",
         gif: "gif2.gif"
     },
     { 
-        text: "Wishing you success, happiness, and everything your heart desires. ✨ ", 
+        text: "I love everything about you—your kindness, your beautiful soul, and the way you care. You are my everything. ✨ ", 
         emoji: "💕",
         gif: "gif1.gif"
     },
     { 
-        text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳 ", 
+        text: "Wishing the happiest birthday to the girl who stole my heart. I promise to love and cherish you forever! 🥳 ", 
         emoji: "🌟",
         gif: "gif2.gif"
     }
