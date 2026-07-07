@@ -42,11 +42,13 @@ body {
 
 .main-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 4rem;
+    font-size: clamp(2rem, 9vw, 4rem);
     color: #ff3b93;
     text-shadow: 0 4px 15px rgba(255, 59, 147, 0.2);
     margin-bottom: 1.5rem;
     font-weight: 700;
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .greeting {

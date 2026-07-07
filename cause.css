@@ -37,10 +37,12 @@ body {
 
 .main-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 3.5rem;
+    font-size: clamp(1.8rem, 8vw, 3.5rem);
     color: #ff3b93;
     text-shadow: 0 4px 15px rgba(255, 59, 147, 0.15);
     margin-bottom: 2rem;
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .reason-card {

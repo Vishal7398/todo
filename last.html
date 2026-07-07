@@ -84,10 +84,12 @@
 
         .welcome h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4.5rem;
+            font-size: clamp(2.2rem, 10vw, 4.5rem);
             color: #ff3b93;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
             animation: fadeInScale 2s ease;
+            width: 100%;
+            word-wrap: break-word;
         }
 
         .welcome p {
@@ -105,7 +107,7 @@
             margin: 0 auto;
             padding: 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2.5rem;
             z-index: 3;
             position: relative;
@@ -176,10 +178,12 @@
 
         .final-message h2 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+            font-size: clamp(2rem, 9vw, 4rem);
             color: #ff3b93;
             margin-bottom: 2rem;
             animation: heartbeat 2s infinite;
+            width: 100%;
+            word-wrap: break-word;
         }
 
         @keyframes heartbeat {
