@@ -70,15 +70,6 @@ function createReasonCard(reason) {
     card.appendChild(text);
     card.appendChild(gifOverlay);
     
-    if (typeof gsap !== 'undefined') {
-        gsap.from(card, {
-            opacity: 0,
-            y: 50,
-            duration: 0.5,
-            ease: "back.out"
-        });
-    }
-
     return card;
 }
 
@@ -108,6 +99,15 @@ function displayNewReason() {
 
         const card = createReasonCard(reasons[currentReasonIndex]);
         reasonsContainer.appendChild(card);
+
+        if (typeof gsap !== 'undefined') {
+            gsap.from(card, {
+                opacity: 0,
+                y: 50,
+                duration: 0.5,
+                ease: "back.out"
+            });
+        }
         
         // Update counter
         reasonCounter.textContent = `Reason ${currentReasonIndex + 1} of ${reasons.length}`;
