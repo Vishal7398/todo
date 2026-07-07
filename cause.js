@@ -28,6 +28,7 @@ const reasonsContainer = document.getElementById('reasons-container');
 const shuffleButton = document.querySelector('.shuffle-button');
 const reasonCounter = document.querySelector('.reason-counter');
 let isTransitioning = false;
+let isStoryMode = false;
 
 // Music player management
 const musicBtn = document.getElementById('music-btn');
@@ -118,22 +119,7 @@ function displayNewReason() {
                 onComplete: () => {
                     shuffleButton.textContent = "Enter Our Storylane 💫";
                     shuffleButton.classList.add('story-mode');
-                    shuffleButton.addEventListener('click', () => {
-                        confetti({
-                            particleCount: 150,
-                            spread: 80,
-                            origin: { y: 0.6 }
-                        });
-                        setTimeout(() => {
-                            gsap.to('body', {
-                                opacity: 0,
-                                duration: 0.8,
-                                onComplete: () => {
-                                    window.location.href = 'last.html';
-                                }
-                            });
-                        }, 800);
-                    });
+                    isStoryMode = true;
                 }
             });
         }
@@ -149,6 +135,24 @@ function displayNewReason() {
 
 // Initialize button click
 shuffleButton.addEventListener('click', () => {
+    if (isStoryMode) {
+        confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+        setTimeout(() => {
+            gsap.to('body', {
+                opacity: 0,
+                duration: 0.8,
+                onComplete: () => {
+                    window.location.href = 'last.html';
+                }
+            });
+        }, 800);
+        return;
+    }
+
     gsap.to(shuffleButton, {
         scale: 0.9,
         duration: 0.1,
@@ -177,15 +181,7 @@ function createFloatingElement() {
     });
 }
 
-// Custom cursor
-const cursor = document.querySelector('.custom-cursor');
-document.addEventListener('mousemove', (e) => {
-    gsap.to(cursor, {
-        x: e.clientX - 15,
-        y: e.clientY - 15,
-        duration: 0.1
-    });
-});
+
 
 window.addEventListener('load', () => {
     updateMusicState();

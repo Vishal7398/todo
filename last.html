@@ -15,7 +15,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none;
         }
 
         body {
@@ -46,19 +45,6 @@
             100% {
                 background-position: 0% 50%;
             }
-        }
-
-        /* Custom glowing cursor */
-        .cursor {
-            width: 24px;
-            height: 24px;
-            background: radial-gradient(circle, rgba(255,105,180,1) 0%, rgba(255,182,193,0.4) 70%, rgba(255,255,255,0) 100%);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease-out;
         }
 
         /* Floating Hearts */
@@ -474,8 +460,7 @@
 </head>
 
 <body>
-    <div class="cursor"></div>
-
+    
     <!-- Music Controller -->
     <button class="music-toggle" id="music-btn" aria-label="Toggle Music">
         <span class="music-icon">🎵</span>
@@ -628,12 +613,7 @@
             });
         });
 
-        // Custom cursor logic
-        const cursor = document.querySelector('.cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        // Music player management
 
         // Music player management
         const musicBtn = document.getElementById('music-btn');
@@ -689,12 +669,6 @@
         // Love button click explosion
         const loveBtn = document.getElementById('love-btn');
         if (loveBtn) {
-            loveBtn.addEventListener('mouseenter', () => {
-                gsap.to(cursor, { scale: 1.8, background: 'rgba(255, 59, 147, 0.6)' });
-            });
-            loveBtn.addEventListener('mouseleave', () => {
-                gsap.to(cursor, { scale: 1, background: 'radial-gradient(circle, rgba(255,105,180,1) 0%, rgba(255,182,193,0.4) 70%, rgba(255,255,255,0) 100%)' });
-            });
             loveBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 confetti({

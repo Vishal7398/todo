@@ -1,10 +1,3 @@
-// Cursor following effect
-const cursor = document.querySelector('.cursor');
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
-
 // Typing effect for greeting
 const greetingText = "Hey You Know What! You're the most adorable human i ever met! 💖";
 const greetingElement = document.querySelector('.greeting');
@@ -99,14 +92,6 @@ window.addEventListener('load', () => {
 // Hover and Click animations
 const enterBtn = document.getElementById('enter-btn');
 if (enterBtn) {
-    enterBtn.addEventListener('mouseenter', () => {
-        gsap.to(cursor, { scale: 1.8, background: 'rgba(255, 59, 147, 0.6)' });
-    });
-
-    enterBtn.addEventListener('mouseleave', () => {
-        gsap.to(cursor, { scale: 1, background: 'radial-gradient(circle, rgba(255,105,180,1) 0%, rgba(255,182,193,0.4) 70%, rgba(255,255,255,0) 100%)' });
-    });
-
     enterBtn.addEventListener('click', () => {
         // Confetti explosion
         confetti({

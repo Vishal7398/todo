@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none;
 }
 
 body {
@@ -17,19 +16,6 @@ body {
     font-family: 'Outfit', sans-serif;
     overflow: hidden;
     position: relative;
-}
-
-/* Custom glowing cursor */
-.cursor {
-    width: 24px;
-    height: 24px;
-    background: radial-gradient(circle, rgba(255,105,180,1) 0%, rgba(255,182,193,0.4) 70%, rgba(255,255,255,0) 100%);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out;
 }
 
 .container {
